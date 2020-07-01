@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,8 +43,14 @@ public class PostController {
 	}
 	
 	@GetMapping("/get/{id}")
-	public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody long id) {
+	public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody String id) {
 		return new ResponseEntity<PostDto>(postService.getSinglePost(id), HttpStatus.OK);
+	}
+	
+	@PutMapping("/post/{id}")
+	public ResponseEntity updatePost(@RequestBody PostDto postDto, @PathVariable String id) {
+		postService.updatePost(postDto, id);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 

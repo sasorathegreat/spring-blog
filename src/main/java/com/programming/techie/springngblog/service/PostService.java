@@ -41,7 +41,7 @@ public class PostService {
 	}
 	
 	@Transactional
-	public PostDto getSinglePost(Long id) {
+	public PostDto getSinglePost(String id) {
 		Post post = postRepository.findById(id).orElseThrow(()->new PostNotFoundException("For Id " + id));
 		return mapFromPostToDto(post);
 	}
@@ -67,6 +67,16 @@ public class PostService {
 		post.setCreatedOn(Instant.now());
 		post.setUpdatedOn(Instant.now());
 		return post;
+	}
+
+	@Transactional
+	public void updatePost(PostDto postDto, String id) {
+		Post post = postRepository.findById(id).orElseThrow(()->new PostNotFoundException("For Id " + id));
+		post.setContent(postDto.getContent());
+		post.setTitle(postDto.getTitle());
+		post.setUpdatedOn(Instant.now());
+		postRepository.save(post);
+		
 	}
 	
 

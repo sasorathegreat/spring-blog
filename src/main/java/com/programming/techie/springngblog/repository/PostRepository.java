@@ -11,7 +11,7 @@ import com.programming.techie.springngblog.model.Post;
 
 
 @RepositoryRestResource(collectionResourceRel = "posts", path = "posts")
-public interface PostRepository extends MongoRepository<Post, Long> {
+public interface PostRepository extends MongoRepository<Post, String> {
 	//List<Post> findAllPost(@Param("name") String name);
 	//List<Post> findPostByTitle(@Param("title") String title);
 }
